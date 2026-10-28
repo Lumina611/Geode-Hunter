@@ -8,3 +8,9 @@
 - 未引入第三方照片、音效、实物扫描、课程教程代码或真实矿物数据。生成标本不是科学鉴定依据。
 
 公开前请作者确认对提供的前期验证版拥有使用/分享权限，并补充任何尚未披露的借用来源。
+
+## 本轮单石验证新增依赖与素材
+
+- Three.js 官方 r160：本地 three.module.js、GLTFLoader.js、BufferGeometryUtils.js，来源 https://github.com/mrdoob/three.js/tree/r160 ，MIT；许可继续随包保留。为本地目录，将 GLTFLoader 的 utils 相对导入改为 ./BufferGeometryUtils.js，其余保持官方文件。import map 将 three 指向本地模块。旧 three.min.js 作为历史依赖保留但当前不加载。
+- 本轮模型、裂纹、材质仍是 Codex 辅助生成的临时程序资产，不是摄影级 GLB 或扫描贴图。
+- 美术参考来自聊天 2 的 AI 概念图 01/03，作为输入留在工作区 inputs，没有把概念图当可旋转模型或冒充 Opal 资产。
