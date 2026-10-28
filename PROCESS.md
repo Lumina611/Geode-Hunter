@@ -76,3 +76,11 @@
 以下是本轮真实变更清单，当前源码和过程材料将一同通过 Desktop 提交。提交完成后的 History 截图会另行保存；每轮证据标清时间，不倒填早期截图。
 
 ![Desktop 变更清单](docs/evidence/2026-10-29-04-desktop-changes.jpg)
+
+## 本轮已产生的真实开发提交
+
+`0921516`：Pivot to Geode Hunter: direction update and 3D effect study。通过 GitHub Desktop 创建，沿用 `3877c1c` 第一版历史，记录本轮转向、代码和阶段材料。
+
+![Desktop 中本轮提交及早期历史](docs/evidence/2026-10-29-05-desktop-history.jpg)
+
+这张截图拍摄于上述提交之后，将在后续证据归档提交中加入；不是提前制造的提交结果。
