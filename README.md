@@ -23,7 +23,7 @@
 python3 -m http.server 8772 --bind 127.0.0.1
 ```
 
-在同一台电脑的浏览器打开 **http://127.0.0.1:8772/prototype/**。需要 Python 3 启动静态服务，应用本身不使用 Python 库、模型或 API；不需 uv、npm、付费账号或远程资源。用 Control+C 停止。端口被占用时改为 8773，并同步更换浏览器地址。也可用 VS Code 的静态服务器扩展服务此目录。
+在同一台电脑的浏览器打开 [http://127.0.0.1:8772/prototype/](http://127.0.0.1:8772/prototype/) 。需要 Python 3 启动静态服务，应用本身不使用 Python 库、模型或 API；不需 uv、npm、付费账号或远程资源。用 Control+C 停止。端口被占用时改为 8773，并同步更换浏览器地址。也可用 VS Code 的静态服务器扩展服务此目录。
 
 `prototype/index.html` 不使用 fetch 或模块导入，设计上可直接双击离线打开；本轮浏览器工具只验收了本机 HTTP 方式，未将 file:// 方式记为已验证。Three.js 0.160.1 已随仓库提供，需支持 WebGL 的近期浏览器。
 
@@ -55,4 +55,4 @@ python3 -m http.server 8772 --bind 127.0.0.1
 - [提交检查单](docs/SUBMISSION.md)：当前可提交进度版及最终提交前缺口。
 - `archive/Momo-v1/`：原仓库第一版只读历史材料，不是新产品界面。
 
-本轮将通过 GitHub Desktop 提交和推送。最终 Canvas 提交前仍须作者确认材料、完成真人试玩，并在退出登录状态下确认公开仓库可见。
+本轮已通过 GitHub Desktop 提交和推送方向调整及过程证据。最终 Canvas 提交前仍须作者确认材料、完成真人试玩，并在退出登录状态下确认公开仓库可见。

@@ -84,3 +84,9 @@
 ![Desktop 中本轮提交及早期历史](docs/evidence/2026-10-29-05-desktop-history.jpg)
 
 这张截图拍摄于上述提交之后，将在后续证据归档提交中加入；不是提前制造的提交结果。
+
+## GitHub 进度推送留证
+
+方向提交 0921516 与证据提交 fe1dbb0 已通过 GitHub Desktop 推送；旧公开仓库链接保留。下图是推送后、补充运行链接格式之前的真实仓库页面。
+
+![本轮 GitHub 进度页面](docs/evidence/2026-10-29-06-github-progress.jpg)
