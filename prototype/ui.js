@@ -1,13 +1,41 @@
 import './app.js';
-/* Phase 1 only: four deliberate strikes, no game economy or batch system. */
-const $=s=>document.querySelector(s),view=window.GeodeView,total=GH_CONFIG.hits;
-let hits=0,locked=false,light=false,timer;
-const labels=['第一次敲击','第二次敲击','第三次敲击','最终敲击'];
-function render(){document.querySelectorAll('.hit-progress i').forEach((dot,i)=>dot.classList.toggle('done',i<hits));$('#strike').disabled=!view||locked||hits>=total;$('#strike').innerHTML=hits>=total?'已揭晓 · 白水晶细闪晶洞':labels[hits]+` <span>${hits+1} / ${total} ↗</span>`;$('#stepHint').textContent=hits===0?'完整原石 · 等待第一次敲击':hits<total?`已敲击 ${hits} 次 · 裂纹逐渐展开`:'四次敲击完成 · 可以继续旋转与放大';}
-$('#strike').onclick=()=>{if(locked||hits>=total||!view)return;hits++;locked=true;if(hits<total){view.strike(hits);$('#feedback').textContent=hits===1?'出现第一道细裂纹。':'裂纹继续延伸，石壳开始松动。';}else{view.reveal();$('#phase').textContent='02 / REVEAL';$('#stageLabel').textContent='白水晶细闪晶洞';$('#title').textContent='石壳之下，细闪白晶。';$('#subtitle').textContent='两半来自同一颗原石。继续转动，观察内壁矿带和短小晶簇。';$('#feedback').textContent='这是占位白晶几何，不是最终摄影级素材。';}render();timer=setTimeout(()=>{locked=false;render()},hits===total?1100:220);};
-$('#reset').onclick=()=>{clearTimeout(timer);hits=0;locked=false;light=false;view?.reset();$('#lightButton').setAttribute('aria-pressed','false');$('#phase').textContent='01 / OBSERVE';$('#stageLabel').textContent='未开原石';$('#title').innerHTML='一颗原石，<br>四次期待。';$('#subtitle').innerHTML='先转动看看纹理，再轻敲四次。<br>同一块石壳之下，是待揭晓的细闪白晶。';$('#feedback').textContent='已重置，可以重新敲击；原石轮廓不变。';render();};
-$('#lightButton').onclick=()=>{light=!light;view?.setLight(light);$('#lightButton').setAttribute('aria-pressed',String(light))};$('#rotateLeft').onclick=()=>view?.rotate(-Math.PI/8);$('#rotateRight').onclick=()=>view?.rotate(Math.PI/8);$('#zoomIn').onclick=()=>view?.zoom(-.7);$('#zoomOut').onclick=()=>view?.zoom(.7);$('#viewReset').onclick=()=>{view?.resetView();if(hits>0&&hits<total)view?.strike(hits)};$('#clueButton').onclick=()=>{$('#clueText').hidden=!$('#clueText').hidden;};
-if(view)view.load({seed:GH_CONFIG.seed,type:'white-druse',phase:'intact'},true);else{$('#feedback').textContent='三维渲染未能启动，请参考画面提示。';document.querySelectorAll('.tool').forEach(b=>b.disabled=true)}render();
-
-// A macro photograph can supplement the model, but is always labelled 2D.
-if(GH_CONFIG.assets.detailImage){const dialog=document.createElement('dialog'),label=document.createElement('p'),image=document.createElement('img'),close=document.createElement('button'),open=document.createElement('button');label.textContent='正式素材细节图 · 二维图片，不是可旋转模型';image.alt='晶洞正式素材细节图';image.style.width='100%';image.src=GH_CONFIG.assets.detailImage;image.onerror=()=>{label.textContent='细节图片未能载入，请检查 config.js 的图片路径。';};close.textContent='关闭';close.className='secondary';close.onclick=()=>dialog.close();dialog.append(label,image,close);open.textContent='查看素材细节图';open.className='text-button';open.onclick=()=>dialog.showModal();document.body.append(dialog);document.querySelector('.story').append(open);}
+import {t,getLanguage,setLanguage,translatePage} from './i18n.js';
+import {StoneSound} from './sound.js';
+// All input paths share this guarded four-strike loop.
+const $=s=>document.querySelector(s),view=window.GeodeView,total=GH_CONFIG.hits,sound=new StoneSound();
+let hits=0,locked=false,light=false,timer,feedback='ready',audioWarning=null;
+function render(){
+ translatePage();
+ document.querySelectorAll('.hit-progress i').forEach((dot,i)=>dot.classList.toggle('done',i<hits));
+ $('#strike').disabled=!view||locked||hits>=total;
+ $('#strike').textContent=hits>=total?t('done'):t('hit'+hits)+'  '+(hits+1)+' / '+total+' ↗';
+ $('#stepHint').textContent=hits===0?t('idle'):hits<total?t('progress',{n:hits}):t('finished');
+ $('#phase').textContent=hits>=total?'02 / REVEAL':'01 / OBSERVE';
+ $('#stageLabel').textContent=t(hits>=total?'revealed':'closed');
+ $('#title').textContent=t(hits>=total?'openTitle':'title');
+ $('#subtitle').textContent=t(hits>=total?'openSubtitle':'subtitle');
+ $('#feedback').textContent=t(audioWarning||feedback);
+ $('#soundButton').textContent=t(sound.enabled?'soundOn':'soundOff');$('#soundButton').setAttribute('aria-pressed',String(sound.enabled));
+ $('#languageButton').textContent=getLanguage()==='zh'?'EN / 中文':'中文 / EN';$('#languageButton').setAttribute('aria-label',t('switchLanguage'));
+ $('#lightButton').setAttribute('aria-pressed',String(light));
+ $('#assetStatus').textContent=t($('#assetStatus').dataset.message||'asset');
+}
+function strike(){
+ if(locked||hits>=total||!view)return;
+ hits++;locked=true;audioWarning=null;
+ if(hits<total){view.strike(hits);feedback=hits===1?'first':'cracking'}else{view.reveal();feedback='placeholder'}
+ sound.strike(hits).then(status=>{if(status==='unavailable'||status==='blocked'){audioWarning=status==='blocked'?'audioBlocked':'audioUnavailable';render()}$('#soundButton').dataset.audioStatus=status;});
+ render();clearTimeout(timer);timer=setTimeout(()=>{locked=false;render()},hits===total?1100:220);
+}
+$('#strike').onclick=strike;$('#stage').addEventListener('stone-tap',strike);
+$('#stage').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();if(!e.repeat)strike()}});
+$('#reset').onclick=()=>{clearTimeout(timer);hits=0;locked=false;light=false;audioWarning=null;view?.reset();feedback='resetFeedback';render()};
+$('#languageButton').onclick=()=>setLanguage(getLanguage()==='zh'?'en':'zh');document.addEventListener('languagechange',render);
+$('#soundButton').onclick=async()=>{sound.setEnabled(!sound.enabled);audioWarning=null;if(sound.enabled){const status=await sound.unlock();if(status==='unavailable'||status==='blocked')audioWarning=status==='blocked'?'audioBlocked':'audioUnavailable';$('#soundButton').dataset.audioStatus=status;}else $('#soundButton').dataset.audioStatus='muted';render()};
+$('#lightButton').onclick=()=>{light=!light;view?.setLight(light);render()};
+$('#rotateLeft').onclick=()=>view?.rotate(-Math.PI/8);$('#rotateRight').onclick=()=>view?.rotate(Math.PI/8);$('#zoomIn').onclick=()=>view?.zoom(-.7);$('#zoomOut').onclick=()=>view?.zoom(.7);$('#viewReset').onclick=()=>{view?.resetView();if(hits>0&&hits<total)view?.strike(hits)};
+$('#clueButton').onclick=()=>{$('#clueText').hidden=!$('#clueText').hidden;$('#clueButton').setAttribute('aria-expanded',String(!$('#clueText').hidden));};
+if(view)view.load({seed:GH_CONFIG.seed,type:'white-druse',phase:'intact'},true);else{feedback='failed';document.querySelectorAll('.tool').forEach(b=>b.disabled=true)}
+render();
+// An optional detail photo is explicitly separate from real 3D observation.
+if(GH_CONFIG.assets.detailImage){const dialog=document.createElement('dialog'),label=document.createElement('p'),image=document.createElement('img'),close=document.createElement('button'),open=document.createElement('button');let failed=false;image.style.width='100%';image.src=GH_CONFIG.assets.detailImage;function translate(){label.textContent=t(failed?'photoError':'photo');image.alt=t('photoAlt');close.textContent=t('close');open.textContent=t('photoOpen')}image.onerror=()=>{failed=true;translate()};close.className='secondary';close.onclick=()=>dialog.close();dialog.append(label,image,close);open.className='text-button';open.onclick=()=>dialog.showModal();document.body.append(dialog);document.querySelector('.story').append(open);document.addEventListener('languagechange',translate);translate();}

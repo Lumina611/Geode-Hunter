@@ -14,3 +14,5 @@
 - Three.js 官方 r160：本地 three.module.js、GLTFLoader.js、BufferGeometryUtils.js，来源 https://github.com/mrdoob/three.js/tree/r160 ，MIT；许可继续随包保留。为本地目录，将 GLTFLoader 的 utils 相对导入改为 ./BufferGeometryUtils.js，其余保持官方文件。import map 将 three 指向本地模块。旧 three.min.js 作为历史依赖保留但当前不加载。
 - 本轮模型、裂纹、材质仍是 Codex 辅助生成的临时程序资产，不是摄影级 GLB 或扫描贴图。
 - 美术参考来自聊天 2 的 AI 概念图 01/03，作为输入留在工作区 inputs，没有把概念图当可旋转模型或冒充 Opal 资产。
+
+- 直接敲击、双语词典和 Web Audio 合成撞击音：本轮由 Codex 辅助编写。没有下载或借用第三方音效录音；新增截图均来自实际运行页面。暖色矿物美术说明由作者提供，仍为目标而非已达摄影级的声明。
