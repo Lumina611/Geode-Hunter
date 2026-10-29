@@ -1,3 +1,4 @@
+import C from './config.js';
 // Shared translations: changing language never reloads or changes the specimen.
 const messages={
 zh:{viewer:'三维原石观察区',tag:'PHASE 01 · 技术可行性验证',pageTitle:'Geode Hunter · 单石技术验证',closed:'未开原石',revealed:'白水晶细闪晶洞',title:'一颗原石，四次期待。',openTitle:'石壳之下，细闪白晶。',subtitle:'拖动观察纹理，直接点石头轻敲四次，揭晓藏在石壳下的细闪白晶。',openSubtitle:'两半来自同一颗原石。继续转动，观察内壁矿带和短小晶簇。',instructions:'拖动旋转 · 滚轮 / 双指缩放 · 点击石头敲击',stageAria:'3D 原石。点击石头敲击，拖动旋转，滚轮或双指缩放；方向键旋转，加减号缩放，回车敲击。',tools:'观察工具',left:'向左旋转',right:'向右旋转',out:'缩小',in:'放大',light:'☼ 补光',viewReset:'恢复视角',clue:'◎ 查看观察提示',clueText:'表面起伏、浅色纹路和局部暗点均为程序生成。它们是观察示例，不是鉴定依据。',reset:'重新开始',hit0:'第一次敲击',hit1:'第二次敲击',hit2:'第三次敲击',hit3:'最终敲击',done:'已揭晓 · 细闪白晶',idle:'完整原石 · 点击石头开始敲击',progress:'已敲击 {n} 次 · 裂纹逐渐展开',finished:'四次敲击完成 · 可以继续旋转与放大',ready:'点击敲击，拖动只旋转。声音可在右上角关闭。',first:'出现第一道细裂纹。',cracking:'裂纹继续延伸，石壳开始松动。',placeholder:'这是占位白晶几何，不是最终摄影级素材。',resetFeedback:'已重置，可以重新敲击；原石轮廓不变。',failed:'三维渲染未能启动，请参考画面提示。',asset:'当前使用临时程序模型与占位材质，非扫描级写实素材。没有 25 块原石、矿币或完整游戏系统。',assetLoaded:'正在使用配置的 GLB / glTF 模型。实际美术品质仍需人工验收。',assetFallback:'正式模型未能载入，已回退到程序模型。请检查路径与 Closed / Open_Left / Open_Right 节点。',textureFallback:'一张正式贴图未能载入，相关材质使用占位效果。',pair:'同一 3D 标本 · 原石与半壳配对',soundOn:'声音：开',soundOff:'声音：关',audioUnavailable:'声音暂不可用，仍可继续观察与敲击。',audioBlocked:'浏览器暂未启用声音，请再点一次声音开关。',switchLanguage:'Switch to English',view:'视角 {angle}° · 缩放 {zoom}%',lost:'图形连接暂时中断。请刷新页面重新载入标本。',startup:'三维画面未能启动。请确认 vendor 下的模块文件完整，使用支持 WebGL 的近期浏览器和 README 中的本地 HTTP 运行说明。',photo:'正式素材细节图 · 二维图片，不是可旋转模型',photoAlt:'晶洞正式素材细节图',photoError:'细节图片未能载入，请检查 config.js 的图片路径。',photoOpen:'查看素材细节图',close:'关闭',hitAria:'四次敲击进度'},
@@ -5,6 +6,8 @@ en:{viewer:'3D specimen inspection',tag:'PHASE 01 · TECHNICAL PROTOTYPE',pageTi
 };
 let language='zh';try{if(localStorage.getItem('gh-language')==='en')language='en'}catch{}
 export const getLanguage=()=>language;
-export function t(key,params={}){let value=messages[language][key]??messages.zh[key]??key;for(const [k,v] of Object.entries(params))value=value.replaceAll('{'+k+'}',v);return value;}
+export function t(key,params={}){params={cost:C.cost,initial:C.initialCoins,base:C.baseReward,correct:C.correctReward,fresh:C.newReward,total:C.batchSize,...params};let value=messages[language][key]??messages.zh[key]??key;for(const [k,v] of Object.entries(params))value=value.replaceAll('{'+k+'}',v);return value;}
 export function setLanguage(next){language=next==='en'?'en':'zh';try{localStorage.setItem('gh-language',language)}catch{}document.dispatchEvent(new Event('languagechange'));}
 export function translatePage(){document.documentElement.lang=language==='zh'?'zh-CN':'en';document.title=t('pageTitle');document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));document.querySelectorAll('[data-i18n-aria]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAria)));}
+
+export function addMessages(zh,en){Object.assign(messages.zh,zh);Object.assign(messages.en,en);}

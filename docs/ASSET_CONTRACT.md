@@ -1,3 +1,30 @@
+# V0.2 配对素材接口
+
+本轮在单石渲染器上实现完整玩法，正式美术仍待作者提供。config.js 将外壳、内部类型、线索与稀有度分开；开局选定的 shell/type/seed/clues 不会在交互时改变。
+
+`pairings` 以 `外壳ID:内部ID` 为键，覆盖全局 assets 默认值，例如：
+
+```js
+pairings: {
+  'chalk:white-druse': {
+    modelUrl: 'assets/chalk-white.glb',
+    closedNode: 'Closed', leftNode: 'Open_Left', rightNode: 'Open_Right',
+    modelScale: 1,
+    detailImage: 'assets/chalk-white-detail.webp'
+  }
+}
+```
+
+不能给相同外壳随便拼接不同轮廓的内部。GLB 中闭合和双半壳必须属于同一个配对模型。没有配置则用固定种子的程序模型；异步载入过期结果不会覆盖后来选中的原石。对程序壳的 shellColorMap / shellNormalMap / shellRoughnessMap 也可通过相同配对覆盖。正式 GLB 建议自带 PBR。
+
+每个 types 条目可补充 `imageUrl`，作为图鉴正式图片；未提供时显示明确的占位色标。`detailImage` 在单独标明“二维图片”的弹窗打开，不替代 3D 旋转。当前表格缩略图仍由程序外壳生成；正式 GLB 上线时还需准备与之对应的正式缩略图，不能把占位缩略图宣称为正式资产。
+
+当前只验证程序模型。正式 GLB、贴图和图片未交付，成功载入、坏文件回退、内存表现与视觉匹配仍需之后专项验收。
+
+---
+
+以下保留 V0.1 的节点/比例约定，固定单颗 1487 为当时状态；V0.2 已改为每批 25 个固定种子。
+
 # Phase 1 素材替换契约
 
 依据：用户提供的 GDD V1.0、Art Direction & Asset Specification，以及最新“只做一颗白晶技术验证”范围。
