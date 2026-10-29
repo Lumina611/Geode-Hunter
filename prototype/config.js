@@ -385,16 +385,16 @@ types:[
   "width": 0.15,
   "length": 0.15,
   "mineral": {
-   "zh": "玉髓",
-   "en": "Chalcedony"
+   "zh": "石英类",
+   "en": "Quartz group"
   },
   "habit": {
-   "zh": "葡萄状圆润集合体",
-   "en": "Rounded botryoidal aggregates"
+   "zh": "葡萄状连生结核与细小覆晶",
+   "en": "Joined botryoidal lobes with fine drusy overgrowth"
   },
   "description": {
-   "zh": "用连生圆润球状表面表现葡萄状集合体，不冒充尖柱水晶。",
-   "en": "Rounded joined surfaces represent botryoidal aggregates rather than pointed quartz."
+   "zh": "连生结核表面覆有细小石英晶体；一些区域呈细闪，其余保持柔和的蜡状光泽。",
+   "en": "Fine quartz crystals coat the joined lobes, mixing drusy reflections with softer waxy areas."
   },
   "fantasy": false,
   "future": false,
@@ -669,4 +669,7 @@ for (const [id, file] of Object.entries({
   modelStatus:'reference-study',openRotationY:[-2.62,2.62]});
 }
 GH_CONFIG.types.find(type=>type.id==='white-druse').art.modelUrl='assets/models/white-druse-study-v2.glb';
+const grapeArt=GH_CONFIG.types.find(type=>type.id==='botryoidal-chalcedony').art;
+grapeArt.modelUrl='assets/models/botryoidal-chalcedony-study-v2.glb';
+grapeArt.detailImage='assets/reference/09-grape-drusy-direction-v02.png';
 export default GH_CONFIG;

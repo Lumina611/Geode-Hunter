@@ -41,3 +41,10 @@
 ### 白水晶细闪内部 V2
 
 2026-10-29，按作者提供的 A/B/DETAIL 参考和明确反馈，由 Codex 辅助编写原创程序网格、三张微晶 PBR 图和白晶专用摄影棚反射配置。没有图转三维服务、下载新模型或以参考图投影替代三维。外壳保持仓库已有模型；参考图未复制为新的游戏贴图。代码与参数见 `tools/build-white-druse-v2.mjs`，实际渲染录像和限制见 `docs/WHITE_DRUSE_V2.md`。
+
+### 2026-10-30 · 葡萄状覆晶改版
+
+- 原创程序几何/PBR：Codex辅助编写 `tools/build-grape-drusy-v2.mjs`；连生标量场主体、微小石英几何、三张细晶PBR图。沿用原外壳与本地Three.js，无新运行依赖。
+- AI方向图：内置OpenAI image_gen生成 `prototype/assets/reference/09-grape-drusy-direction-v02.png`，仅用于二维方向/参考展示，不是实物照片、扫描或模型渲染。[完整提示词](docs/GRAPE_DIRECTION_PROMPT.txt)。
+- 真实标本参考：[FossilEra #105118](https://www.fossilera.com/minerals/1-7-purple-botryoidal-druzy-grape-agate-indonesia)、[Khyber ING01/02/04/05](https://www.khyberminerals.com/collections/50/)、[Mardani 13452](https://www.mardanifineminerals.com/blog/2020/10/11/amethyst-13452/)、[St Andrews GE12275](https://collections.st-andrews.ac.uk/item/botryoidal-crust-of-chalcedony/1021090)。照片版权归来源方，本轮只链接观察，没有下载、贴图、输入图像生成器或再分发。未下载或购买外部三维模型。
+- 网页截图与旋转录像来自实际本地三维渲染；不作为真人试玩证据。[实际结果和局限](docs/GRAPE_DRUSY_V2.md)。
