@@ -430,3 +430,7 @@ AI 工具是 Codex，用于检查、编写程序网格/PBR/对比工具及测试
 GitHub Desktop History 中已出现本轮实现提交 `cc55d55`（Refine white quartz interior with sparse short crystal clusters）；以下为实际界面截图，随后单独追加截图记录，保留真实提交顺序。
 
 ![白晶改版在 Desktop History 中的真实记录](docs/evidence/white-druse-v2-desktop-history.jpg)
+
+最终游戏内窄窗口复核发现白晶两半边缘贴近裁切，另加白晶打开视图的相机余量；其他品种和严格对比页的镜头不变。重新免费打开图鉴，完整双半壳可见，78矿币保持不变。原截图保留，追加最终取景：
+
+![白晶双半壳完整取景](docs/evidence/white-druse-v2-framed.jpg)

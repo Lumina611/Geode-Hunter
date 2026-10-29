@@ -3,7 +3,7 @@ import {resolveAssets} from './assets.js';
 import './vocabulary.js';
 import './v03-vocabulary.js';
 import {StoneTable} from './table.js?v=workshop-4';
-import './app.js?v=white-druse-2';
+import './app.js?v=white-druse-2a';
 import './workshop-vocabulary.js';
 import {create,act,restore,serialize,stoneOf,typeOf,pending,summary} from './game.mjs';
 import {t,getLanguage,setLanguage,translatePage} from './i18n.js';

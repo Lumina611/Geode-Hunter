@@ -86,7 +86,7 @@ stage.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','Ar
 el.addEventListener('webglcontextlost',e=>{e.preventDefault();document.querySelector('#error').hidden=false;document.querySelector('#error').textContent=t('lost');});
 let last=performance.now();function animate(now){requestAnimationFrame(animate);if(document.hidden||!stage.clientWidth)return;const dt=Math.min((now-last)/1000,.05);last=now;progress=reduced.matches?(opened?1:0):THREE.MathUtils.damp(progress,opened?1:0,3.4,dt);left.position.x=-progress*1.35;right.position.x=progress*1.35;left.rotation.y=-progress*2.62;right.rotation.y=Math.PI+(2.62-Math.PI)*progress;
 // Preserve both geode halves on narrow viewports by fitting to horizontal field of view.
-const minFit=opened?5.8/Math.max(.35,camera.aspect)*1.42:3.3/Math.max(.35,camera.aspect)*1.42;
+const minFit=opened?(currentType.id==='white-druse'?6.8:5.8)/Math.max(.35,camera.aspect)*1.42:3.3/Math.max(.35,camera.aspect)*1.42;
 const fitted=Math.max(targetZoom,Math.min(minFit,18));camera.position.z=THREE.MathUtils.damp(camera.position.z,fitted,8,dt);
 if(externalAsset){left.visible=right.visible=false;externalAsset.closed.visible=progress<.01;externalAsset.a.visible=externalAsset.b.visible=progress>=.01;externalAsset.a.position.x=externalAsset.ax-progress*1.35;externalAsset.b.position.x=externalAsset.bx+progress*1.35;if(externalAsset.openRotationY){externalAsset.a.rotation.set(0,THREE.MathUtils.lerp(0,externalAsset.openRotationY[0],progress),0);externalAsset.b.rotation.set(0,THREE.MathUtils.lerp(Math.PI,externalAsset.openRotationY[1],progress),0);}}
 
