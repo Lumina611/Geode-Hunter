@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import C from '../prototype/config.js';
-import {create,act,serialize,restore,summary,pending,typeOf} from '../prototype/game.mjs';
+import {create as createGame,act,serialize,restore,summary,pending,typeOf} from '../prototype/game.mjs';
+const create=(seed,batch=1)=>createGame(seed,batch,2); // Original V0.2 generator regression suite.
 const identity=g=>JSON.stringify(g.stones.map(s=>s.specimen));
 function open(g,s,guess){act(g,'guess',s.id,guess);act(g,'pay',s.id);for(let i=0;i<4;i++)act(g,'hit',s.id);return s;}
 test('25 fixed identities, seeded replay, varied shells, every initial result preassigned',()=>{const a=create(1487),b=create(1487);assert.equal(a.stones.length,25);assert.equal(identity(a),identity(b));assert.equal(new Set(a.stones.map(s=>s.specimen.type)).size,5);assert.equal(new Set(a.stones.map(s=>s.specimen.shell)).size,5);assert.equal(new Set(a.stones.map(s=>s.specimen.seed)).size,25);assert.ok(a.stones.every(s=>s.specimen.clues.length>=1&&s.specimen.clues.length<=2));assert.throws(()=>{a.stones[0].specimen.type='other'});assert.notEqual(identity(a),identity(create(1488)));});

@@ -1,0 +1,247 @@
+{
+  "record": {
+    "version": 2,
+    "seed": 1487,
+    "batch": 1,
+    "events": [
+      {
+        "action": "guess",
+        "id": "01",
+        "value": "white"
+      },
+      {
+        "action": "pay",
+        "id": "01"
+      },
+      {
+        "action": "hit",
+        "id": "01"
+      },
+      {
+        "action": "hit",
+        "id": "01"
+      }
+    ]
+  },
+  "expected": [
+    {
+      "seed": 1801320758,
+      "type": "pale-amethyst",
+      "shell": "chalk",
+      "clues": [
+        "grain"
+      ]
+    },
+    {
+      "seed": 33103265,
+      "type": "clear-prism",
+      "shell": "cracked",
+      "clues": [
+        "pale"
+      ]
+    },
+    {
+      "seed": 2269982848,
+      "type": "clear-prism",
+      "shell": "chalk",
+      "clues": [
+        "pores",
+        "pale"
+      ]
+    },
+    {
+      "seed": 1235321731,
+      "type": "smoky-quartz",
+      "shell": "spotted",
+      "clues": [
+        "grain",
+        "dark"
+      ]
+    },
+    {
+      "seed": 2503230362,
+      "type": "white-druse",
+      "shell": "spotted",
+      "clues": [
+        "dark"
+      ]
+    },
+    {
+      "seed": 329991157,
+      "type": "white-druse",
+      "shell": "chalk",
+      "clues": [
+        "pores"
+      ]
+    },
+    {
+      "seed": 3806706948,
+      "type": "white-druse",
+      "shell": "veined",
+      "clues": [
+        "grain",
+        "vein"
+      ]
+    },
+    {
+      "seed": 1873194871,
+      "type": "pale-amethyst",
+      "shell": "cracked",
+      "clues": [
+        "rough"
+      ]
+    },
+    {
+      "seed": 554883902,
+      "type": "clear-prism",
+      "shell": "weathered",
+      "clues": [
+        "dark",
+        "worn"
+      ]
+    },
+    {
+      "seed": 195787401,
+      "type": "pale-amethyst",
+      "shell": "spotted",
+      "clues": [
+        "grain",
+        "dark"
+      ]
+    },
+    {
+      "seed": 3636211912,
+      "type": "white-druse",
+      "shell": "veined",
+      "clues": [
+        "grain"
+      ]
+    },
+    {
+      "seed": 3544374699,
+      "type": "deep-amethyst",
+      "shell": "veined",
+      "clues": [
+        "grain",
+        "vein"
+      ]
+    },
+    {
+      "seed": 658457634,
+      "type": "white-druse",
+      "shell": "veined",
+      "clues": [
+        "pale",
+        "vein"
+      ]
+    },
+    {
+      "seed": 2639967581,
+      "type": "white-druse",
+      "shell": "weathered",
+      "clues": [
+        "dark",
+        "worn"
+      ]
+    },
+    {
+      "seed": 3098095564,
+      "type": "white-druse",
+      "shell": "veined",
+      "clues": [
+        "vein",
+        "pale"
+      ]
+    },
+    {
+      "seed": 558473759,
+      "type": "smoky-quartz",
+      "shell": "veined",
+      "clues": [
+        "grain",
+        "vein"
+      ]
+    },
+    {
+      "seed": 2604024390,
+      "type": "white-druse",
+      "shell": "weathered",
+      "clues": [
+        "grain",
+        "worn"
+      ]
+    },
+    {
+      "seed": 3106678897,
+      "type": "white-druse",
+      "shell": "chalk",
+      "clues": [
+        "pores",
+        "pale"
+      ]
+    },
+    {
+      "seed": 4096171536,
+      "type": "white-druse",
+      "shell": "cracked",
+      "clues": [
+        "crack",
+        "rough"
+      ]
+    },
+    {
+      "seed": 673370323,
+      "type": "clear-prism",
+      "shell": "cracked",
+      "clues": [
+        "rough",
+        "crack"
+      ]
+    },
+    {
+      "seed": 2773473706,
+      "type": "smoky-quartz",
+      "shell": "weathered",
+      "clues": [
+        "worn"
+      ]
+    },
+    {
+      "seed": 1027164101,
+      "type": "smoky-quartz",
+      "shell": "weathered",
+      "clues": [
+        "grain",
+        "worn"
+      ]
+    },
+    {
+      "seed": 3826491284,
+      "type": "white-druse",
+      "shell": "veined",
+      "clues": [
+        "grain"
+      ]
+    },
+    {
+      "seed": 3489562055,
+      "type": "white-druse",
+      "shell": "chalk",
+      "clues": [
+        "pores",
+        "pale"
+      ]
+    },
+    {
+      "seed": 1839418958,
+      "type": "clear-prism",
+      "shell": "spotted",
+      "clues": [
+        "grain",
+        "dark"
+      ]
+    }
+  ],
+  "coins": 80,
+  "hits": 2
+}
