@@ -426,3 +426,7 @@ AI 工具是 Codex，用于检查、编写程序网格/PBR/对比工具及测试
 [真实旋转录像](docs/evidence/white-druse-v1-v2-rotation.webm) · [详细参数与测试](docs/WHITE_DRUSE_V2.md)
 
 连续底层、短晶簇通透度、原壳轮廓和矿带自然程度仍是程序近似，不声称已达到参考摄影。尚未进行他人无讲解试玩，也未验收实体触屏/低端设备。本轮保留所有旧文件，继续通过GitHub Desktop保存修改与截图；没有发布网站或提交Canvas。
+
+GitHub Desktop History 中已出现本轮实现提交 `cc55d55`（Refine white quartz interior with sparse short crystal clusters）；以下为实际界面截图，随后单独追加截图记录，保留真实提交顺序。
+
+![白晶改版在 Desktop History 中的真实记录](docs/evidence/white-druse-v2-desktop-history.jpg)
