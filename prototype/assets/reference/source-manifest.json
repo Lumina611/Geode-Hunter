@@ -1,0 +1,31 @@
+{
+  "status": "二维美术候选，未接入项目，未配对GLB或PBR；并非实物摄影",
+  "tool": "built-in image_gen",
+  "shared_prompt": "独立正方形矿物图鉴候选图；纯黑工作室背景；左上柔和主光、右侧微弱轮廓光；略俯视三分之四正面构图；完整粗壳与空腔；不含文字、界面、水印；自然矿物质感；不宣称真实产地或尺度。",
+  "items": [
+    {
+      "id": "01-white-druse",
+      "label": "白水晶细闪",
+      "subject_prompt": "密集细短白色晶簇",
+      "file": "01-white-druse-candidate-v01.png"
+    },
+    {
+      "id": "05-deep-amethyst",
+      "label": "深紫水晶",
+      "subject_prompt": "深紫短粗晶簇与浅色矿带",
+      "file": "05-deep-amethyst-candidate-v01.png"
+    },
+    {
+      "id": "06-banded-agate",
+      "label": "玛瑙条带晶洞",
+      "subject_prompt": "灰蓝白色波状同心矿带与细晶空腔",
+      "file": "06-banded-agate-candidate-v01.png"
+    },
+    {
+      "id": "09-botryoidal-chalcedony",
+      "label": "葡萄状玉髓空腔",
+      "subject_prompt": "灰紫色圆润葡萄状集合体",
+      "file": "09-botryoidal-chalcedony-candidate-v01.png"
+    }
+  ]
+}

@@ -657,4 +657,15 @@ clues:{pores:{zh:'表面散布细小孔隙，边缘不规则。',en:'Small pores
 assets:{modelUrl:null,closedNode:'Closed',leftNode:'Open_Left',rightNode:'Open_Right',modelScale:1,shellColorMap:null,shellNormalMap:null,shellRoughnessMap:null,detailImage:null},
 pairings:{}
 };
+// Four original GLB studies reconstructed from the supplied 2D AI references.
+// One closed shell and its matching halves; the source image is a separate 2D detail.
+for (const [id, file] of Object.entries({
+ 'white-druse':'01-white-druse', 'deep-amethyst':'05-deep-amethyst',
+ 'banded-agate':'06-banded-agate', 'botryoidal-chalcedony':'09-botryoidal-chalcedony'
+})) {
+ const art=GH_CONFIG.types.find(type=>type.id===id).art;
+ Object.assign(art,{modelUrl:`assets/models/${id}-study-v1.glb`,
+  detailImage:`assets/reference/${file}-candidate-v01.png`,
+  modelStatus:'reference-study',openRotationY:[-2.62,2.62]});
+}
 export default GH_CONFIG;

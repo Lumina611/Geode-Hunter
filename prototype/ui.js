@@ -22,7 +22,7 @@ function element(tag,className,text){const el=document.createElement(tag);if(cla
 function current(){return selectedId?stoneOf(game,selectedId):null;}
 function specimenFor(stone){return {...stone.specimen,phase:stone.phase==='revealed'||stone.phase==='opened'?'opened':'intact'};}
 function show(next){selectionEpoch++;screen=next;notice=null;render();}
-async function select(id){if(screen==='galleryScreen'&&table?.move?.resolve)return;const epoch=++selectionEpoch;if(screen==='galleryScreen'&&table){const completed=await table.focus(id);if(!completed||epoch!==selectionEpoch||screen!=='galleryScreen')return;}selectedId=id;catalogType=null;draftGuess=null;light=false;feedback=null;clearTimeout(timer);locked=false;screen='experience';render();const stone=current();view?.load(specimenFor(stone),true);if(stone.phase==='cracking')view?.strike(stone.hits);$('#backButton').focus();}
+async function select(id){if(screen==='galleryScreen'&&table?.move?.resolve)return;const epoch=++selectionEpoch;if(screen==='galleryScreen'&&table){const completed=await table.focus(id);if(!completed||epoch!==selectionEpoch||screen!=='galleryScreen')return;}selectedId=id;catalogType=null;draftGuess=null;light=false;feedback=null;clearTimeout(timer);locked=false;screen='experience';render();const stone=current();await view?.load(specimenFor(stone),true);if(epoch!==selectionEpoch||selectedId!==id||screen!=='experience')return;if(stone.phase==='cracking')view?.strike(stone.hits);$('#backButton').focus();}
 function preview(typeId){selectedId=null;catalogType=typeId;light=false;feedback=null;screen='experience';render();view?.load({seed:1487+Number(typeOf(typeId).number)*13,type:typeId,shell:'chalk',phase:'opened'},true);$('#backButton').focus();}
 function transition(action,value){try{const stone=act(game,action,selectedId,value);if(stone.phase==='revealed')catalog.add(stone.specimen.type);persist();return stone;}catch(e){feedback=e.code||'invalidEvent';render();return null}}
 function strike(){const stone=current();if(!stone||locked||stone.phase!=='cracking'){if(stone?.phase==='intact'){feedback=stone.guess?'pay':'chooseGuess';render()}return;}
@@ -70,7 +70,7 @@ function renderInspection(){
 }
 function catalogCard(type,unlocked,stone){
  const card=element('article','catalog-card'+(unlocked?'':' is-locked')),key=stone?'stone:'+game.seed+':'+stone.id:'type:'+type.id;
- const image=element('img','catalog-photo'),badge=element('p','render-label',t(type.art.imageUrl?'formalImage':'placeholderLabel'));
+ const image=element('img','catalog-photo'),badge=element('p','render-label',t(type.art.imageUrl?'formalImage':type.art.modelStatus==='reference-study'?'referenceModelBadge':'placeholderLabel'));
  image.alt=unlocked?nameOf(type):t('locked');image.loading='lazy';image.width=480;image.height=320;
  const source=type.art.imageUrl||previews.get(key);if(source)image.src=source;else card.classList.add('is-loading');
  image.onerror=()=>{const fallback=previews.get(key);if(fallback&&image.src!==fallback){image.src=fallback;badge.textContent=t('placeholderLabel')}};
@@ -80,7 +80,7 @@ function catalogCard(type,unlocked,stone){
 function renderCollection(){const round=$('#roundCollection');round.replaceChildren();const found=game.stones.filter(s=>s.phase==='revealed'||s.phase==='opened');if(!found.length)round.append(element('p','intro',t('roundEmpty')));else for(const stone of found)round.append(catalogCard(typeOf(stone.specimen.type),true,stone));const permanent=$('#permanentCollection');permanent.replaceChildren();for(const type of C.types)permanent.append(catalogCard(type,catalog.has(type.id)));ensurePreviews();}
 async function ensurePreviews(){if(!view||previewBusy)return;previewBusy=true;try{
  const items=[...C.types.map(type=>({key:'type:'+type.id,type:type.id,seed:1487+Number(type.number)*13,shell:'chalk'})),...game.stones.filter(s=>s.phase==='revealed'||s.phase==='opened').map(s=>({key:'stone:'+game.seed+':'+s.id,type:s.specimen.type,seed:s.specimen.seed,shell:s.specimen.shell}))];
- for(const item of items){if(screen!=='collectionScreen')break;if(previews.has(item.key))continue;previews.set(item.key,view.catalogThumbnail(item.type,item.seed,item.shell));renderCollection();await new Promise(resolve=>requestAnimationFrame(resolve));}
+ for(const item of items){if(screen!=='collectionScreen')break;if(previews.has(item.key))continue;previews.set(item.key,await view.assetThumbnail(item.type,item.seed,item.shell));renderCollection();await new Promise(resolve=>requestAnimationFrame(resolve));}
  }finally{previewBusy=false}}
 function renderSummary(){const s=summary(game);$('#summaryBatch').textContent=t('batch',{n:game.batch});$('#summaryTitle').textContent=t(game.status==='complete'?'complete':'gameover');$('#summaryKinds').textContent=game.first.length?game.first.map(id=>nameOf(typeOf(id))).join(' · '):t('none');const stats=$('#summaryStats');stats.replaceChildren();for(const [label,value] of [['statOpened',s.opened+'/25'],['statAccuracy',s.rate+'% ('+s.correct+'/'+s.opened+')'],['statKinds',s.kinds+'/'+C.types.length],['statRarest',s.rarest?nameOf(s.rarest):t('none')]]){const box=element('div');box.append(element('span','fine-print',t(label)),element('strong','',value));stats.append(box)}}
 function render(){

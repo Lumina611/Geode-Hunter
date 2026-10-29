@@ -1,0 +1,35 @@
+{
+  "generator": "tools/build-reference-models.mjs",
+  "status": "Procedural 3D study based on supplied AI 2D candidates, not final photoreal assets",
+  "textureSize": 512,
+  "variants": [
+    {
+      "id": "white-druse",
+      "bytes": 12542108,
+      "triangles": 131344,
+      "meshNodes": 18,
+      "closedMatchesOpenShell": true
+    },
+    {
+      "id": "deep-amethyst",
+      "bytes": 6375516,
+      "triangles": 84904,
+      "meshNodes": 18,
+      "closedMatchesOpenShell": true
+    },
+    {
+      "id": "banded-agate",
+      "bytes": 7965080,
+      "triangles": 132824,
+      "meshNodes": 18,
+      "closedMatchesOpenShell": true
+    },
+    {
+      "id": "botryoidal-chalcedony",
+      "bytes": 12363428,
+      "triangles": 130344,
+      "meshNodes": 18,
+      "closedMatchesOpenShell": true
+    }
+  ]
+}

@@ -24,3 +24,9 @@
 ## V0.3
 
 工作台、程序木纹、模型形态变体、石屑及图鉴渲染由 Codex 按作者要求编写，沿用 Three.js r160 / MIT、本地 GLTFLoader。未引入第三方摄影或扫描模型。矿物简介新增核对来源，见 [MINERAL_SOURCES](docs/MINERAL_SOURCES.md)；此前“未引入真实矿物数据”属于前阶段记录，本轮新增的是有来源的简短说明，并非下载资料表或图片。星空/极光明确为虚构，稀有度和产区主题为玩法配置。
+
+## 2026-10-29 · 二维参考与三维材质重建
+
+- 作者提供 `geode-art-candidates-v01` 四张候选及素材说明，说明标注为 OpenAI 内置 image_gen 生成，非实物摄影。原文件复制至 `prototype/assets/reference/`，原说明保留为 `source-manifest.json`。没有下载第三方矿物照片，没有把 AI 图片归为实物扫描或科学矿物资料。
+- 四种 GLB、15 张 PBR 通道 PNG 和生成器由 Codex 按作者要求编写与生成，使用现有本地 Three.js、Node 内置 zlib/fs；不新增外部依赖。数学噪声制作颜色、法线、粗糙度，不是从候选图恢复真实材质；未调用图转三维服务或 Blender。
+- 保留三维背面和内部结构的推测性质、近似空腔顶点暗化、摄影质量与性能限制，见 `docs/REFERENCE_MODELS.md`。截图来自真实浏览器，不是效果概念图或参与者试用证据。
