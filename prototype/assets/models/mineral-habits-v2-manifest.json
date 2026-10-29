@@ -1,0 +1,216 @@
+{
+  "generator": "tools/build-mineral-habits-v2.mjs",
+  "status": "Procedural mineral habit studies, not photoreal scans",
+  "variants": [
+    {
+      "id": "clear-prism",
+      "form": "quartz",
+      "bytes": 8797768,
+      "stats": [
+        {
+          "quartz": 650,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 650,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "smoky-quartz",
+      "form": "quartz",
+      "bytes": 9316180,
+      "stats": [
+        {
+          "quartz": 750,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 750,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "pale-amethyst",
+      "form": "quartz",
+      "bytes": 10767832,
+      "stats": [
+        {
+          "quartz": 1030,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 1030,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "deep-amethyst",
+      "form": "quartz",
+      "bytes": 9730888,
+      "stats": [
+        {
+          "quartz": 830,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 830,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "banded-agate",
+      "form": "agate",
+      "bytes": 11880140,
+      "stats": [
+        {
+          "quartz": 600,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 600,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "honey-calcite",
+      "form": "calcite",
+      "bytes": 7570912,
+      "stats": [
+        {
+          "quartz": 0,
+          "rhomb": 488,
+          "dogtooth": 132,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 0,
+          "rhomb": 500,
+          "dogtooth": 120,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "white-calcite",
+      "form": "calcite",
+      "bytes": 7674628,
+      "stats": [
+        {
+          "quartz": 0,
+          "rhomb": 505,
+          "dogtooth": 145,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 0,
+          "rhomb": 522,
+          "dogtooth": 128,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "black-association",
+      "form": "mixed-black",
+      "bytes": 11440964,
+      "stats": [
+        {
+          "quartz": 928,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 232
+        },
+        {
+          "quartz": 928,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 232
+        }
+      ]
+    },
+    {
+      "id": "celestite",
+      "form": "tabular",
+      "bytes": 8331104,
+      "stats": [
+        {
+          "quartz": 0,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 360,
+          "dark": 0
+        },
+        {
+          "quartz": 0,
+          "rhomb": 0,
+          "dogtooth": 0,
+          "tabular": 360,
+          "dark": 0
+        }
+      ]
+    },
+    {
+      "id": "quartz-calcite",
+      "form": "mixed-calcite",
+      "bytes": 10759116,
+      "stats": [
+        {
+          "quartz": 925,
+          "rhomb": 155,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        },
+        {
+          "quartz": 925,
+          "rhomb": 155,
+          "dogtooth": 0,
+          "tabular": 0,
+          "dark": 0
+        }
+      ]
+    }
+  ]
+}

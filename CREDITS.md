@@ -48,3 +48,14 @@
 - AI方向图：内置OpenAI image_gen生成 `prototype/assets/reference/09-grape-drusy-direction-v02.png`，仅用于二维方向/参考展示，不是实物照片、扫描或模型渲染。[完整提示词](docs/GRAPE_DIRECTION_PROMPT.txt)。
 - 真实标本参考：[FossilEra #105118](https://www.fossilera.com/minerals/1-7-purple-botryoidal-druzy-grape-agate-indonesia)、[Khyber ING01/02/04/05](https://www.khyberminerals.com/collections/50/)、[Mardani 13452](https://www.mardanifineminerals.com/blog/2020/10/11/amethyst-13452/)、[St Andrews GE12275](https://collections.st-andrews.ac.uk/item/botryoidal-crust-of-chalcedony/1021090)。照片版权归来源方，本轮只链接观察，没有下载、贴图、输入图像生成器或再分发。未下载或购买外部三维模型。
 - 网页截图与旋转录像来自实际本地三维渲染；不作为真人试玩证据。[实际结果和局限](docs/GRAPE_DRUSY_V2.md)。
+
+
+### 2026-10-30 · 满铺内壁与矿物晶习研究
+- 原创程序代码与 GLB：作者提出密度纠正，Codex 辅助实现 `tools/build-grape-drusy-v3.mjs`、`tools/build-mineral-habits-v2.mjs` 及共用网格工具。既有中性配对外壳保留；没有下载第三方模型、使用图转三维服务、将照片投影为模型或将概念图冒称实际效果。
+- AI 图片：内置 imagegen 生成 `09-grape-drusy-direction-v03.png` 与 `mineral-habits-direction-v01.png`，仅为二维方向图。完整最终提示词：`docs/GRAPE_DIRECTION_PROMPT_V03.txt`、`docs/MINERAL_HABITS_DIRECTION_PROMPT.txt`。
+- 三张原样研究照片：`prototype/assets/research/botryoidal-real.jpg`（Quartz-46809）、`calcite-quartz-real.jpg`（Calcite-Quartz-118317）、`celestine-real.jpg`（Celestine-Calcite-Rhodochrosite-244357）。均为 **Rob Lavinsky / iRocks.com，CC BY-SA 3.0**，未修改，作为独立研究图片按原许可再分发；不使用仓库默认代码许可替代图片许可。原始文件页、直接来源与许可链接完整列于 [sources.json](prototype/assets/research/sources.json)，并在 [研究展示页](tests/mineral-research.html) 逐图可见署名。
+- 形态依据：[Handbook of Mineralogy 石英](https://handbookofmineralogy.org/pdfs/quartz.pdf)、[方解石](https://handbookofmineralogy.org/pdfs/calcite.pdf)、[天青石](https://handbookofmineralogy.org/pdfs/celestine.pdf)。中文描述为概括，不是整篇复制。
+- [Zone Minérale 实物细闪葡萄状晶洞](https://www.zoneminerale.com/product-page/stunning-sparkly-blue-lace-agate-geode-botryoidal-druzy-malawi) 为覆盖密度与细晶皮参考；该商业照片仅链接，未下载再分发。
+- 实际截图均来自本地 Three.js 浏览器渲染。机器操作和自动检查不冒充第三方用户试用。详情及未达目标见 [修订记录](docs/MINERAL_DENSITY_REVISION.md)。
+
+研究页截图 `docs/evidence/mineral-research.jpg` 同样按 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) 提供，保留原照片署名；其余原创代码和截图遵循各自声明。

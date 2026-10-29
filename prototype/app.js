@@ -59,7 +59,14 @@ const studio=new THREE.Scene();studio.background=new THREE.Color(0x201a14);
 for(const [x,y,z,w,h,color] of [[-4,3,4,3,5,0xfff1e3],[4,1,2,2,5,0xe4ddd0],[0,5,-1,6,2,0xffffff]]){const panel=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color,side:THREE.DoubleSide}));panel.position.set(x,y,z);panel.lookAt(0,0,0);studio.add(panel)}
 const pmrem=new THREE.PMREMGenerator(renderer);const envTarget=pmrem.fromScene(studio,.02);scene.environment=envTarget.texture;pmrem.dispose();
 const whiteEnvironment=whiteInteriorEnvironment(renderer);let extraFill=false;
-function interiorLighting(revealed){const drusy=revealed&&['white-druse','botryoidal-chalcedony'].includes(currentType.id);scene.environment=drusy?whiteEnvironment.texture:envTarget.texture;setInteriorLights(scene,drusy,extraFill);}
+function mineralLights(target,typeId,extra=false){
+ const type=GH_CONFIG.types.find(t=>t.id===typeId),natural=type&&!type.fantasy;
+ setInteriorLights(target,natural,extra);
+ if(natural&&!['white-druse','botryoidal-chalcedony'].includes(typeId)){
+  const profile=[.55,2.5,.65,.35+(extra?2.1:0)];target.children.filter(o=>o.isLight).forEach((light,i)=>light.intensity=profile[i]??light.intensity);
+ }
+}
+function interiorLighting(revealed){const drusy=revealed&&!currentType.fantasy;scene.environment=drusy?whiteEnvironment.texture:envTarget.texture;if(revealed)mineralLights(scene,currentType.id,extraFill);else setInteriorLights(scene,false,extraFill);}
 let opened=false,progress=0,auto=false,targetZoom=7,externalAsset=null,shakeTime=0,shakeStrength=0,neutralRoll=-.08;
 // A short, gravity-driven dust burst; no fracture physics or floating ornaments.
 const dustCount=28,dustPositions=new Float32Array(dustCount*3),dustVelocities=new Float32Array(dustCount*3),dustGeometry=new THREE.BufferGeometry();dustGeometry.setAttribute('position',new THREE.BufferAttribute(dustPositions,3));
@@ -86,7 +93,7 @@ stage.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','ArrowUp','Ar
 el.addEventListener('webglcontextlost',e=>{e.preventDefault();document.querySelector('#error').hidden=false;document.querySelector('#error').textContent=t('lost');});
 let last=performance.now();function animate(now){requestAnimationFrame(animate);if(document.hidden||!stage.clientWidth)return;const dt=Math.min((now-last)/1000,.05);last=now;progress=reduced.matches?(opened?1:0):THREE.MathUtils.damp(progress,opened?1:0,3.4,dt);left.position.x=-progress*1.35;right.position.x=progress*1.35;left.rotation.y=-progress*2.62;right.rotation.y=Math.PI+(2.62-Math.PI)*progress;
 // Preserve both geode halves on narrow viewports by fitting to horizontal field of view.
-const minFit=opened?(['white-druse','botryoidal-chalcedony'].includes(currentType.id)?6.8:5.8)/Math.max(.35,camera.aspect)*1.42:3.3/Math.max(.35,camera.aspect)*1.42;
+const minFit=opened?(!currentType.fantasy?6.8:5.8)/Math.max(.35,camera.aspect)*1.42:3.3/Math.max(.35,camera.aspect)*1.42;
 const fitted=Math.max(targetZoom,Math.min(minFit,18));camera.position.z=THREE.MathUtils.damp(camera.position.z,fitted,8,dt);
 if(externalAsset){left.visible=right.visible=false;externalAsset.closed.visible=progress<.01;externalAsset.a.visible=externalAsset.b.visible=progress>=.01;externalAsset.a.position.x=externalAsset.ax-progress*1.35;externalAsset.b.position.x=externalAsset.bx+progress*1.35;if(externalAsset.openRotationY){externalAsset.a.rotation.set(0,THREE.MathUtils.lerp(0,externalAsset.openRotationY[0],progress),0);externalAsset.b.rotation.set(0,THREE.MathUtils.lerp(Math.PI,externalAsset.openRotationY[1],progress),0);}}
 
@@ -115,7 +122,7 @@ function exterior(data,N=36,M=24){const oldSeed=shapeSeed,oldShell=currentShell;
 function catalogThumbnail(typeId,specimenSeed=1487,shellId='chalk'){
  const saved={shapeSeed,seed,currentType,currentShell,materials,inner:innerMat.color.clone(),size:renderer.getSize(new THREE.Vector2())};
  shapeSeed=specimenSeed>>>0;seed=shapeSeed;currentType=GH_CONFIG.types.find(t=>t.id===typeId)||GH_CONFIG.types[0];currentShell=GH_CONFIG.shells.find(s=>s.id===shellId)||GH_CONFIG.shells[0];materials=palette(currentType);innerMat.color.set(currentType.color).multiplyScalar(.40);
- const preview=new THREE.Scene();preview.background=null;preview.environment=['white-druse','botryoidal-chalcedony'].includes(typeId)?whiteEnvironment.texture:envTarget.texture;for(const light of scene.children.filter(x=>x.isLight))preview.add(light.clone());setInteriorLights(preview,['white-druse','botryoidal-chalcedony'].includes(typeId));
+ const preview=new THREE.Scene();preview.background=null;preview.environment=!GH_CONFIG.types.find(t=>t.id===typeId)?.fantasy?whiteEnvironment.texture:envTarget.texture;for(const light of scene.children.filter(x=>x.isLight))preview.add(light.clone());mineralLights(preview,typeId);
  const a=half(),b=half();a.position.x=-1.3;b.position.x=1.3;a.rotation.set(.08,-2.62,0);b.rotation.set(.08,2.62,0);preview.add(a,b);
  const cam=new THREE.PerspectiveCamera(36,1.5,.1,40);cam.position.set(0,.35,7.4);cam.lookAt(0,0,0);renderer.setSize(480,320,false);renderer.render(preview,cam);const result=renderer.domElement.toDataURL('image/png');
  const ownedGeometry=new Set(),ownedMaterial=new Set();for(const group of [a,b])group.traverse(o=>{if(o.geometry&&!new Set(geometries.values()).has(o.geometry))ownedGeometry.add(o.geometry);if(o.material&&o.material!==rock&&o.material!==innerMat)ownedMaterial.add(o.material)});ownedGeometry.forEach(g=>g.dispose());ownedMaterial.forEach(m=>m.dispose());
@@ -129,7 +136,7 @@ async function assetThumbnail(typeId,specimenSeed=1487,shellId='chalk'){
   if(!importedModels.has(assets.modelUrl))importedModels.set(assets.modelUrl,new GLTFLoader().loadAsync(assets.modelUrl));
   const gltf=await importedModels.get(assets.modelUrl),a=gltf.scene.getObjectByName(assets.leftNode)?.clone(true),b=gltf.scene.getObjectByName(assets.rightNode)?.clone(true);
   if(!a||!b)throw Error('Missing paired preview halves');
-  const preview=new THREE.Scene();preview.environment=['white-druse','botryoidal-chalcedony'].includes(typeId)?whiteEnvironment.texture:envTarget.texture;for(const light of scene.children.filter(x=>x.isLight))preview.add(light.clone());setInteriorLights(preview,['white-druse','botryoidal-chalcedony'].includes(typeId));
+  const preview=new THREE.Scene();preview.environment=!GH_CONFIG.types.find(t=>t.id===typeId)?.fantasy?whiteEnvironment.texture:envTarget.texture;for(const light of scene.children.filter(x=>x.isLight))preview.add(light.clone());mineralLights(preview,typeId);
   const group=new THREE.Group();group.scale.fromArray(referenceScale({seed:specimenSeed},assets));group.add(a,b);finishStudyShell(group,{shell:shellId});preview.add(group);a.position.x-=1.35;b.position.x+=1.35;
   if(assets.openRotationY){a.rotation.set(0,assets.openRotationY[0],0);b.rotation.set(0,assets.openRotationY[1],0);}
   const cam=new THREE.PerspectiveCamera(36,1.5,.1,40);cam.position.set(0,.35,7.8);cam.lookAt(0,0,0);const size=renderer.getSize(new THREE.Vector2());renderer.setSize(480,320,false);renderer.render(preview,cam);const result=renderer.domElement.toDataURL('image/png');renderer.setSize(size.x,size.y,false);releaseStudyFinish(group);return result;

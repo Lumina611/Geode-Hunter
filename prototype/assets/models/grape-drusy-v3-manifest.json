@@ -1,0 +1,29 @@
+{
+  "generator": "tools/build-grape-drusy-v3.mjs",
+  "bytes": 36778696,
+  "report": [
+    {
+      "nodules": 268,
+      "coverage": {
+        "samples": 3342,
+        "ratio": 1,
+        "centerRatio": 1
+      },
+      "bodyTriangles": 156672,
+      "microcrystals": 5444,
+      "coatingTriangles": 97992
+    },
+    {
+      "nodules": 266,
+      "coverage": {
+        "samples": 3342,
+        "ratio": 1,
+        "centerRatio": 1
+      },
+      "bodyTriangles": 154884,
+      "microcrystals": 5510,
+      "coatingTriangles": 99180
+    }
+  ],
+  "status": "Procedural 3D study, not a scan"
+}

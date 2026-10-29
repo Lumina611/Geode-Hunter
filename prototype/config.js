@@ -670,6 +670,10 @@ for (const [id, file] of Object.entries({
 }
 GH_CONFIG.types.find(type=>type.id==='white-druse').art.modelUrl='assets/models/white-druse-study-v2.glb';
 const grapeArt=GH_CONFIG.types.find(type=>type.id==='botryoidal-chalcedony').art;
-grapeArt.modelUrl='assets/models/botryoidal-chalcedony-study-v2.glb';
-grapeArt.detailImage='assets/reference/09-grape-drusy-direction-v02.png';
+grapeArt.modelUrl='assets/models/botryoidal-chalcedony-study-v3.glb';
+grapeArt.detailImage='assets/reference/09-grape-drusy-direction-v03.png';
+// Family-specific dense linings, with the accepted white revision retained.
+for(const type of GH_CONFIG.types.filter(t=>!t.fantasy&&!['white-druse','botryoidal-chalcedony'].includes(t.id))){
+ Object.assign(type.art,{modelUrl:`assets/models/${type.id}-study-v2.glb`,detailImage:'assets/reference/mineral-habits-direction-v01.png',modelStatus:'reference-study',openRotationY:[-2.62,2.62]});
+}
 export default GH_CONFIG;

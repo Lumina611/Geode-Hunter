@@ -6,9 +6,9 @@ import {referenceScale} from '../prototype/assets.js';
 const root=new URL('../prototype/',import.meta.url);
 function readGLB(path){const bytes=readFileSync(new URL(path,root));assert.equal(bytes.readUInt32LE(),0x46546c67);assert.equal(bytes.readUInt32LE(4),2);assert.equal(bytes.readUInt32LE(8),bytes.length);const length=bytes.readUInt32LE(12);assert.equal(bytes.readUInt32LE(16),0x4e4f534a);const doc=JSON.parse(bytes.subarray(20,20+length).toString());assert.equal(bytes.readUInt32LE(24+length),0x004e4942);return{doc,bin:bytes.subarray(28+length)};}
 const configured=C.types.filter(t=>t.art.modelStatus==='reference-study');
-test('four independent reference-based assets are local, paired, and candidly labeled',()=>{
+test('twelve independent reference-based assets are local, paired, and candidly labeled',()=>{
  assert.deepEqual(referenceScale({seed:1},{modelScale:2}),[2,2,2]);assert.deepEqual(referenceScale({seed:1487},{modelStatus:'reference-study'}),referenceScale({seed:1487},{modelStatus:'reference-study'}));assert.notDeepEqual(referenceScale({seed:1487},{modelStatus:'reference-study'}),referenceScale({seed:1488},{modelStatus:'reference-study'}));
- assert.deepEqual(configured.map(t=>t.id),['white-druse','deep-amethyst','banded-agate','botryoidal-chalcedony']);
+ assert.deepEqual(configured.map(t=>t.id),C.types.filter(t=>!t.fantasy).map(t=>t.id));
  for(const type of configured){assert.deepEqual(type.art.openRotationY,[-2.62,2.62]);assert.equal(type.art.imageUrl,null);assert.ok(readFileSync(new URL(type.art.detailImage,root)).length>1000);const {doc}=readGLB(type.art.modelUrl);for(const name of ['Closed','Open_Left','Open_Right'])assert.equal(doc.nodes.filter(n=>n.name===name).length,1);assert.equal(doc.extras.status,'Original procedural reconstruction, not a scan');assert.equal(doc.textures.length,6);assert.ok(doc.materials.every(m=>m.pbrMetallicRoughness.metallicFactor===0));}
 });
 test('GLB buffers, embedded PNG textures, attributes, and triangle indices are valid',()=>{

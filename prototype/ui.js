@@ -1,9 +1,9 @@
 import C from './config.js';
 import {resolveAssets} from './assets.js';
 import './vocabulary.js';
-import './v03-vocabulary.js';
+import './v03-vocabulary.js?v=mineral-density-4';
 import {StoneTable} from './table.js?v=workshop-4';
-import './app.js?v=grape-drusy-2';
+import './app.js?v=mineral-density-4';
 import './workshop-vocabulary.js';
 import {create,act,restore,serialize,stoneOf,typeOf,pending,summary} from './game.mjs';
 import {t,getLanguage,setLanguage,translatePage} from './i18n.js';
