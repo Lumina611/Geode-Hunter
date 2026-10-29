@@ -2,8 +2,9 @@ import C from './config.js';
 import {resolveAssets} from './assets.js';
 import './vocabulary.js';
 import './v03-vocabulary.js';
-import {StoneTable} from './table.js';
-import './app.js';
+import {StoneTable} from './table.js?v=workshop-4';
+import './app.js?v=workshop-4';
+import './workshop-vocabulary.js';
 import {create,act,restore,serialize,stoneOf,typeOf,pending,summary} from './game.mjs';
 import {t,getLanguage,setLanguage,translatePage} from './i18n.js';
 import {StoneSound} from './sound.js';
@@ -11,10 +12,11 @@ const $=selector=>document.querySelector(selector),view=window.GeodeView,sound=n
 const nameOf=item=>getLanguage()==='en'?item.en:item.name;
 const freshSeed=()=>{const n=new Uint32Array(1);crypto.getRandomValues(n);return n[0]};
 let game,selectedId=null,catalogType=null,screen='galleryScreen',light=false,locked=false,timer,feedback=null,storageWarning=null,notice=null;
+let tableSelectedId=null,tableRoundKey=null,tableTransition=false;
 let catalog=new Set(),draftGuess=null,selectionEpoch=0,previewBusy=false;const previews=new Map();let table=null;
 for(const key of [C.legacyCatalogStorage,C.catalogStorage])try{const raw=localStorage.getItem(key);if(raw){const parsed=JSON.parse(raw);if(!Array.isArray(parsed)||parsed.some(id=>!typeOf(id)))throw Error('Invalid catalog');for(const id of parsed)catalog.add(id)}}catch(e){storageWarning=e instanceof SyntaxError||e.message==='Invalid catalog'?'catalogDamaged':'storageUnavailable'}
 try{const raw=localStorage.getItem(C.storage)||localStorage.getItem(C.legacyStorage);game=raw?restore(raw):create(freshSeed());if(raw&&JSON.parse(raw).version===2)notice='saveMigrated';}catch{game=create(freshSeed());storageWarning='badSave'}
-try{if(view)table=new StoneTable($('#tableStage'),data=>view.exterior(data),id=>select(id));}catch(e){notice='tableUnavailable';console.error(e)}
+try{if(view)table=new StoneTable($('#tableStage'),data=>view.exterior(data),id=>chooseOnTable(id));}catch(e){notice='tableUnavailable';console.error(e)}
 // A revealed stone already unlocks the permanent entry, even before reward collection.
 for(const stone of game.stones)if(stone.phase==='revealed'||stone.phase==='opened')catalog.add(stone.specimen.type);
 function persist(){try{localStorage.setItem(C.storage,serialize(game));localStorage.setItem(C.catalogStorage,JSON.stringify([...catalog]));}catch{storageWarning='storageUnavailable'}}
@@ -31,9 +33,11 @@ function strike(){const stone=current();if(!stone||locked||stone.phase!=='cracki
  sound.strike(stone.hits).then(status=>{if(status==='blocked'||status==='unavailable')feedback=status==='blocked'?'audioBlocked':'audioUnavailable';$('#soundButton').dataset.audioStatus=status;render()});
  render();clearTimeout(timer);timer=setTimeout(()=>{locked=false;render()},stone.phase==='revealed'?1000:240);
 }
+function chooseOnTable(id){if(tableTransition||table?.move)return;tableSelectedId=id;table?.choose(id);renderTableSelection();}
+function renderTableSelection(){const stone=game.stones.find(item=>item.id===tableSelectedId);$('#selectionNumber').textContent=stone?.id||'—';$('#selectionChips').replaceChildren();$('#selectionLabel').textContent=t(stone?'selectedStone':'selectPrompt');if(stone){const shell=C.shells.find(item=>item.id===stone.specimen.shell);$('#selectionChips').append(element('span','selection-chip',nameOf(shell)));const clue=stone.specimen.clues.find(id=>t('clueTag_'+id)!==nameOf(shell));if(clue)$('#selectionChips').append(element('span','selection-chip',t('clueTag_'+clue)));}$('#inspectSelection').disabled=!stone||tableTransition;$('#inspectSelection').textContent=t(stone&&(stone.phase==='opened'||stone.phase==='revealed')?'viewOpened':'pickUp');}
 function renderGallery(){
  const region=C.regions.find(r=>r.id===game.region);$('#batchLabel').textContent=t('batch',{n:game.batch})+' · '+(region?nameOf(region):'');$('#roundCounter').textContent=t('roundCounter',{n:game.opened});
- $('#pendingNotice').hidden=!pending(game);$('#resultsButton').hidden=game.status==='active';table?.sync(game.stones,game.generation+':'+game.seed);
+ $('#pendingNotice').hidden=!pending(game);$('#resultsButton').hidden=game.status==='active';const roundKey=game.generation+':'+game.seed;if(tableRoundKey!==roundKey){tableRoundKey=roundKey;tableSelectedId=null;}table?.sync(game.stones,roundKey);table?.choose(tableSelectedId);renderTableSelection();
 }
 function renderInspection(){
  const stone=current(),catalogOnly=!!catalogType,type=catalogOnly?typeOf(catalogType):stone?typeOf(stone.specimen.type):null;if(!type)return;
@@ -84,11 +88,11 @@ async function ensurePreviews(){if(!view||previewBusy)return;previewBusy=true;tr
  }finally{previewBusy=false}}
 function renderSummary(){const s=summary(game);$('#summaryBatch').textContent=t('batch',{n:game.batch});$('#summaryTitle').textContent=t(game.status==='complete'?'complete':'gameover');$('#summaryKinds').textContent=game.first.length?game.first.map(id=>nameOf(typeOf(id))).join(' · '):t('none');const stats=$('#summaryStats');stats.replaceChildren();for(const [label,value] of [['statOpened',s.opened+'/25'],['statAccuracy',s.rate+'% ('+s.correct+'/'+s.opened+')'],['statKinds',s.kinds+'/'+C.types.length],['statRarest',s.rarest?nameOf(s.rarest):t('none')]]){const box=element('div');box.append(element('span','fine-print',t(label)),element('strong','',value));stats.append(box)}}
 function render(){
- translatePage();for(const id of ['galleryScreen','experience','collectionScreen','summaryScreen'])$('#'+id).hidden=id!==screen;
+ document.body.classList.toggle('at-workbench',screen==='galleryScreen');translatePage();for(const id of ['galleryScreen','experience','collectionScreen','summaryScreen'])$('#'+id).hidden=id!==screen;
  table?.setActive(screen==='galleryScreen');
  $('#balance').textContent=game.coins;$('#balance').dataset.coins=game.coins;
  $('#galleryNav').setAttribute('aria-current',screen==='galleryScreen'?'page':'false');$('#collectionNav').setAttribute('aria-current',screen==='collectionScreen'?'page':'false');
- $('#soundButton').textContent=t(sound.enabled?'soundOn':'soundOff');$('#soundButton').setAttribute('aria-pressed',String(sound.enabled));$('#languageButton').textContent=getLanguage()==='zh'?'EN / 中文':'中文 / EN';$('#languageButton').setAttribute('aria-label',t('switchLanguage'));
+ $('#soundButton').setAttribute('aria-label',t(sound.enabled?'soundOn':'soundOff'));$('#soundButton').classList.toggle('is-muted',!sound.enabled);$('#soundButton').setAttribute('aria-pressed',String(sound.enabled));$('#languageButton').textContent=getLanguage()==='zh'?'EN / 中文':'中文 / EN';$('#languageButton').setAttribute('aria-label',t('switchLanguage'));
  $('#storageNotice').hidden=!storageWarning;$('#storageNotice').textContent=storageWarning?t(storageWarning):'';$('#notice').hidden=!notice;$('#notice').textContent=notice?t(notice):'';
  if(screen==='galleryScreen')renderGallery();if(screen==='experience')renderInspection();if(screen==='collectionScreen')renderCollection();if(screen==='summaryScreen')renderSummary();
 }
@@ -108,3 +112,5 @@ $('#lightButton').onclick=()=>{light=!light;view?.setLight(light);render()};$('#
 $('#detailButton').onclick=()=>{$('#detailImage').src=$('#detailButton').dataset.src;$('#detailImage').alt=t('photoAlt');$('#detailPhotoLabel').textContent=t('photo');$('#detailDialog').showModal()};$('#detailImage').onerror=()=>$('#detailPhotoLabel').textContent=t('photoError');$('#closeDetail').onclick=()=>$('#detailDialog').close();
 if(!view){notice='failed';document.querySelectorAll('.tool').forEach(button=>button.disabled=true)}
 persist();render();
+
+$('#inspectSelection').onclick=async()=>{if(!tableSelectedId||tableTransition)return;tableTransition=true;renderTableSelection();try{await select(tableSelectedId)}finally{tableTransition=false;renderTableSelection();}};
