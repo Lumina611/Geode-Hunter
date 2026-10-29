@@ -1,0 +1,11 @@
+{
+  "generator": "tools/build-white-druse-v2.mjs",
+  "bytes": 7865168,
+  "independentCrystalsPerHalf": [
+    78,
+    78
+  ],
+  "bedTrianglesPerHalf": 16562,
+  "unchangedExteriorSource": "white-druse-study-v1.glb",
+  "status": "Procedural 3D study, not photographic or scanned"
+}

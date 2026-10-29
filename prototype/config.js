@@ -668,4 +668,5 @@ for (const [id, file] of Object.entries({
   detailImage:`assets/reference/${file}-candidate-v01.png`,
   modelStatus:'reference-study',openRotationY:[-2.62,2.62]});
 }
+GH_CONFIG.types.find(type=>type.id==='white-druse').art.modelUrl='assets/models/white-druse-study-v2.glb';
 export default GH_CONFIG;
