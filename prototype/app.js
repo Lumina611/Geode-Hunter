@@ -1,5 +1,5 @@
 import GH_CONFIG from './config.js';
-import {resolveAssets,referenceScale} from './assets.js';
+import {resolveAssets,referenceScale} from './assets.js?v=reference-models-1';
 import * as THREE from 'three';
 import {t} from './i18n.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';

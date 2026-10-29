@@ -360,3 +360,10 @@ Codex 编写可重复运行的生成器，导出四个独立 GLB。短细晶、�
 ![故意缺失文件后的回退测试](docs/evidence/geode-model-07-fallback.jpg)
 
 GitHub Desktop 保存本轮代码、生成素材、截图和累积过程，保留既有提交历史。
+
+### 同轮刷新检查与修复
+
+Desktop 已建立本轮素材提交 `ed88295` 后，继续刷新旧验收页时，实际发现浏览器拿到新版 app 模块但旧版 assets 模块，报 `referenceScale` 导出不存在，页面停止初始化。源码和 HTTP 文件本身含有该导出，属于开发中的模块缓存混用。为 app/table 对该依赖加显式资源版本，重新刷新旧页后实际 GLB 加载和双半壳展示恢复。修复作为后续 Desktop 提交保留，未改写成第一次就全部通过。
+
+![Desktop 本轮素材提交操作](docs/evidence/geode-model-08-desktop.jpg)
+![修复缓存混用后刷新成功的实际画面](docs/evidence/geode-model-09-cache-fixed.jpg)

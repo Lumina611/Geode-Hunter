@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import C from './config.js';
 import {GLTFLoader} from './vendor/GLTFLoader.js';
-import {resolveAssets,referenceScale} from './assets.js';
+import {resolveAssets,referenceScale} from './assets.js?v=reference-models-1';
 import {t} from './i18n.js';
 // All 25 specimens are real meshes in THIS scene, with one perspective camera.
 export class StoneTable {
