@@ -59,3 +59,4 @@
 - 实际截图均来自本地 Three.js 浏览器渲染。机器操作和自动检查不冒充第三方用户试用。详情及未达目标见 [修订记录](docs/MINERAL_DENSITY_REVISION.md)。
 
 研究页截图 `docs/evidence/mineral-research.jpg` 同样按 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) 提供，保留原照片署名；其余原创代码和截图遵循各自声明。
+- 2026-11-01 试玩后科普：Codex 辅助整理双语说明与作者转述的反馈；基础资料为 [Quartz](https://handbookofmineralogy.org/pdfs/quartz.pdf)、[Calcite](https://handbookofmineralogy.org/pdfs/calcite.pdf)、[Celestine](https://handbookofmineralogy.org/pdfs/celestine.pdf)，均为 Handbook of Mineralogy。说明为简短概括，程序模型为观察辅助，不用于实物矿物鉴定。朋友反馈不含姓名或录音；未编造助手旁观记录。

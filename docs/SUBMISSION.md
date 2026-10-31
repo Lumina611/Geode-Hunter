@@ -1,4 +1,4 @@
-> 2026-11-01 更新：公开作业仓库为 https://github.com/Lumina611/Geode-Hunter ，GitHub Pages 试玩入口为 https://lumina611.github.io/Geode-Hunter/ 。Canvas 仍需由作者提交仓库网址；真实他人试玩反馈尚待补充。以下历史阶段记录保留。
+> 2026-11-01 最新更新：公开作业仓库为 https://github.com/Lumina611/Geode-Hunter ，GitHub Pages 试玩入口为 https://lumina611.github.io/Geode-Hunter/ 。已收到作者转述的一位朋友自行试玩的真实反馈，未报告卡点；已据此补充中英文科普与观察要点，详见 USER_TRIAL_01.md 和 PROCESS.md。新增内容尚未朋友复试。Canvas 仍需作者确认后自行提交仓库网址。以下历史阶段记录保留，待办状态反映当时情况。
 
 > 当前 V0.3：真正共享 3D 工作台、14 类元数据与图鉴详情已实现。最新功能/实测/素材差距见 README、V03_TESTING.md、V03_ASSETS.md。下文是保留的历史阶段。
 

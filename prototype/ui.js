@@ -1,3 +1,4 @@
+import {mineralNotes} from './mineral-notes.js?v=1';
 import C from './config.js';
 import {resolveAssets} from './assets.js';
 import './vocabulary.js';
@@ -68,7 +69,7 @@ function renderInspection(){
  }
  $('#feedback').textContent=feedback?t(feedback):!catalogOnly&&pending(game)&&pending(game)!==stone?t('pendingNotice'):!catalogOnly&&game.status!=='active'?t('roundEnded'):t('modelOnly');
  const shellId=catalogOnly?'chalk':stone.specimen.shell;const assets=resolveAssets({shell:shellId,type:type.id,seed:catalogOnly?1487+Number(type.number)*13:stone.specimen.seed});$('#detailButton').hidden=!assets.detailImage;$('#detailButton').dataset.src=assets.detailImage||'';
- $('#catalogFacts').hidden=!revealed;if(revealed){$('#specimenKind').textContent=t(type.fantasy?'fantasy':type.future?'futureEntry':'realReference');const facts=$('#mineralFacts');facts.replaceChildren();for(const [key,value] of [['mineral',type.mineral[getLanguage()]],['habit',type.habit[getLanguage()]],['guessCategory',nameOf(C.categories.find(c=>c.id===type.category))],['rarity',t('rarity'+type.rarity)]])facts.append(element('dt','',t(key)),element('dd','',value));$('#specimenDescription').textContent=type.description[getLanguage()];}
+ $('#catalogFacts').hidden=!revealed;if(revealed){$('#specimenKind').textContent=t(type.fantasy?'fantasy':type.future?'futureEntry':'realReference');const facts=$('#mineralFacts');facts.replaceChildren();for(const [key,value] of [['mineral',type.mineral[getLanguage()]],['habit',type.habit[getLanguage()]],['guessCategory',nameOf(C.categories.find(c=>c.id===type.category))],['rarity',t('rarity'+type.rarity)]])facts.append(element('dt','',t(key)),element('dd','',value));$('#specimenDescription').textContent=type.description[getLanguage()];const notes=mineralNotes(type,getLanguage()),panel=$('#mineralNotes');panel.replaceChildren(element('h2','',notes.title),element('p','',notes.body),element('h3','',notes.observeTitle),element('p','',notes.observe));if(notes.sources.length){const links=element('p','fine-print',notes.sourceTitle+': ');for(const item of notes.sources){const a=element('a','',item.name);a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';links.append(a,document.createTextNode(' '));}panel.append(links);}}
  $('#lightButton').setAttribute('aria-pressed',String(light));
  $('#assetStatus').textContent=t($('#assetStatus').dataset.message||'asset');
 }

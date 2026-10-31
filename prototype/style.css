@@ -23,3 +23,5 @@
 .table-number:active:not(:disabled){transform:translate(-50%,-50%)}
 
 .catalog-photo{mix-blend-mode:normal}.catalog-card.is-locked .catalog-photo{filter:brightness(.10) grayscale(1);opacity:.8}
+
+.mineral-notes{margin-top:20px;padding-top:16px;border-top:1px solid #514439}.mineral-notes h2{font-size:17px}.mineral-notes h3{font-size:13px;font-weight:500;margin:16px 0 5px}.mineral-notes p{font-size:14px;line-height:1.8;color:#c8bdad}.mineral-notes a{color:#cbb8d0}
