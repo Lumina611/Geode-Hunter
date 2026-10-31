@@ -2,7 +2,19 @@
 
 从同一张三维开石工作台的 25 颗原石里挑选，旋转观察、猜测、支付虚拟矿币，敲四次揭晓并收藏。面向喜欢天然矿物和轻松发现体验的人。**这是可玩原型；正式写实美术尚未完成。**
 
-## 启动（Mac）
+## 在线试玩（发给朋友或老师）
+
+**直接试玩：https://lumina611.github.io/Geode-Hunter/**
+
+公开源代码与作业提交仓库：https://github.com/Lumina611/Geode-Hunter
+
+浏览器直接打开试玩地址即可，不需要下载、安装 VS Code 或启动 Python。首次加载 3D 模型可能稍慢，建议先用电脑浏览器。游戏记录保存在当前浏览器；在线版与本机版的进度分开，不会互相覆盖。
+
+这是当前可玩原型，正式写实美术尚未完成。朋友请先自行尝试，再反馈首先做了什么、哪里犹豫、能否理解开石/奖励/重新开始。真实观察及据此作出的改动会记录到 PROCESS.md；目前尚无第三方试玩结果，不能将开发测试当成用户试用。
+
+[可转发的话、反馈记录模板与实际发布检查](docs/PUBLIC_PLAYTEST.md)。
+
+## 本地启动（Mac）
 
 双击本文件夹的 **启动晶洞猎人.command**，保持终端开启，再打开 [http://127.0.0.1:8773/prototype/](http://127.0.0.1:8773/prototype/)。玩完按 Control+C 停止。
 
@@ -93,7 +105,7 @@ node --test tests/*.test.mjs
 
 `tests/visual.html` 是不读取或改写存档的 14 类程序形态验收页，不代表玩家解锁，也不是真人试用。
 
-原 Momo、转向、单石、V0.2 的真实过程继续保留在 [PROCESS](PROCESS.md) 和 Git 历史；[Momo 原报告](archive/Momo-v1/README.md) 未删除。仍需至少一位其他人无讲解试玩并据此迭代。尚未提交 Canvas，未部署网站；每次通过 GitHub Desktop 保存。
+原 Momo、转向、单石、V0.2 的真实过程继续保留在 [PROCESS](PROCESS.md) 和 Git 历史；[Momo 原报告](archive/Momo-v1/README.md) 未删除。仍需至少一位其他人无讲解试玩并据此迭代。尚未提交 Canvas；2026-11-01 经作者明确授权发布 GitHub Pages，在线链接见上方。此前未发布的过程记录继续保留；每次文件修改通过 GitHub Desktop 保存。
 
 ## 历史记录：白水晶细闪内部改版
 

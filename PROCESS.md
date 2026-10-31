@@ -485,3 +485,19 @@ GitHub Desktop History 中已出现本轮实现提交 `cc55d55`（Refine white q
 摄影级质感仍未完成：有程序颗粒、规则晶面、简化透光和不够自然的外缘。较大的 GLB 尚未做低端设备性能专项测试。作者尚未确认本轮实际美术；课程所需至少一位他人无讲解试玩仍未发生，不能填造观察或调研数据。本次按既定要求通过 GitHub Desktop 留下开发提交，未提交 Canvas 或部署网站。
 
 ![GitHub Desktop 提交前：本次文件、摘要和真实修改说明](docs/evidence/mineral-density-desktop.jpg)
+
+## 2026-11-01 · 将本地原型发布为可远程试玩的网页
+
+作者先询问公开仓库是否等于试玩链接，随后明确要求“帮我发布一下”。本次授权更新此前“不发布网站”的限制，不包含代交 Canvas。确认现有仓库为 Geode-Hunter，旧 keep-a-straight-face 地址自动跳转；公开仓库用于代码和过程，127.0.0.1 只指访问者本机。
+
+通过 GitHub 网站将 Pages 设为 main / 根目录，随后显示 Your site is live。试玩入口为 **https://lumina611.github.io/Geode-Hunter/**，根 index.html 自动进入游戏。README 顶部增加在线试玩和作业仓库地址，保留本地终端运行说明；新增 .nojekyll 直接发布静态文件。文件修订仍通过 GitHub Desktop 保存和同步。
+
+实际公网检查完成选石、旋转、猜测、支付、四击、揭晓与领奖：100→80→98，01 号开出玛瑙，猜错奖励为 8+0+10。返回工作台显示 1/25，切换语言和刷新后数据保持。公网与原本机存档分开，没有改写本机的 78 矿币或待领奖记录。发布前 24 项自动检查通过，浏览器未捕获 warn/error。没有重新公网通关全部 25 颗，实体触屏和低端设备性能未在本轮验收。
+
+新增 [朋友试玩说明、空白反馈模板和实际发布检查](docs/PUBLIC_PLAYTEST.md)。这是开发者/AI 发布检查，**不是**另一位参与者的无讲解试玩；第三方试玩与根据反馈的迭代仍需真实完成，不能预填结果。
+
+![GitHub Pages 发布成功](docs/evidence/geode-pages-settings.jpg)
+![公网揭晓过程](docs/evidence/geode-public-reveal.jpg)
+![刷新后的公网工作台](docs/evidence/geode-public-live.jpg)
+
+![通过 GitHub Desktop 保存发布说明和证据](docs/evidence/geode-pages-desktop.jpg)

@@ -1,3 +1,5 @@
+> 2026-11-01 更新：公开作业仓库为 https://github.com/Lumina611/Geode-Hunter ，GitHub Pages 试玩入口为 https://lumina611.github.io/Geode-Hunter/ 。Canvas 仍需由作者提交仓库网址；真实他人试玩反馈尚待补充。以下历史阶段记录保留。
+
 > 当前 V0.3：真正共享 3D 工作台、14 类元数据与图鉴详情已实现。最新功能/实测/素材差距见 README、V03_TESTING.md、V03_ASSETS.md。下文是保留的历史阶段。
 
 > V0.2 更新：当前已实现 25 颗核心玩法骨架，运行见 README，最新测试见 V02_TESTING.md。下文保留历史阶段描述，不作为当前功能限制。真人试玩和 Canvas 最终确认仍未完成。
